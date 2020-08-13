@@ -1,6 +1,17 @@
+import fs from 'fs';
+import path from 'path';
+
 import fetch from 'node-fetch';
+import { loadavg } from 'os';
 
 const PROJECTS_URL = 'https://raw.githubusercontent.com/teabolt/dcu_eng_comp_projects_dataset/master/booklets_data';
+
+const SAVE_DIR = './bulk-data';
+
+const YEARS = [
+    '2020',
+    '2019'
+];
 
 /* Fetch projects data for a single year. */
 export async function fetchData(year) {
@@ -32,3 +43,27 @@ export function bulkPrepare(data, year) {
     });
     return bulk;
 }
+
+/* Write JSON data in bulk format (1 object per line) */
+export function writeBulk(data) {
+
+}
+
+/* This downloads the data of the listed years and transforms it into a format
+   suitable for ElasticSearch bulk requests.
+*/
+function loadYears() {
+    if (!fs.existsSync(SAVE_DIR)) {
+        fs.mkdirSync(SAVE_DIR)
+    }
+
+    YEARS.forEach(async (year) => {
+        const data = await fetchData(year);
+        const versionedData = versionData(data, year);
+        const bulkData = bulkPrepare(versionedData, year);
+        const json = bulkData.map(JSON.stringify).reduce((prev, next) => `${prev}\n${next}`) + '\n';
+        fs.writeFileSync(path.join(SAVE_DIR, `${year}.txt`), json);
+    });
+}
+
+loadYears();
