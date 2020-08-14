@@ -1,1 +1,3 @@
-curl -X GET "http://localhost:9200/_cat/indices?v"
+source .env
+
+curl -X GET "$CLUSTER/_cat/indices?v"

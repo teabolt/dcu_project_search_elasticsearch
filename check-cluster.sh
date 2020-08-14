@@ -1,4 +1,6 @@
+source .env
+
 echo "Health"
-curl -X GET "http://localhost:9200/_cat/health?v"
+curl -X GET "$CLUSTER/_cat/health?v"
 echo "Nodes"
-curl -X GET "http://localhost:9200/_cat/nodes?v&pretty"
+curl -X GET "$CLUSTER/_cat/nodes?v&pretty"

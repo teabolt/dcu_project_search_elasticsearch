@@ -1,4 +1,4 @@
-CLUSTER=http://localhost:9200
+source .env
 
 curl "$CLUSTER/_cat/health?v"
 
