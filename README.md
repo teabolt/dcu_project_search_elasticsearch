@@ -1,31 +1,34 @@
 # Elasticsearch for DCU Project Search
 
-REST API with curl:
-curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'
+`npm run start` to convert projects JSON to bulk data ready to be consumed by ElasticSearch.
 
-List indices:
-curl localhost:9200/_cat/indices
+`docker-compose up` to start an ElasticSearch cluster.
 
-Delete an index:
-curl -X DELETE localhost:9200/indexname
+`./bootstrap` to index bulk project data on a fresh cluster.
+
+`./check-cluster.sh` to check the cluster's status.
+
+`./check-indices.sh` to check the indices of the cluster.
+
+Example uses:
 
 Search:
-curl -X GET "localhost:9200/projects/_search?pretty" -H 'Content-Type: application/json' -d'
+curl -X GET "localhost:9200/projects/\_search?pretty" -H 'Content-Type: application/json' -d'
 {
-  "query": { "match": { "description": "cloud" } }
+"query": { "match": { "description": "cloud" } }
 }
 '
 
 Aggregate:
-curl -X GET "localhost:9200/projects/_search?pretty" -H 'Content-Type: application/json' -d'
+curl -X GET "localhost:9200/projects/\_search?pretty" -H 'Content-Type: application/json' -d'
 {
-  "size": 0,
-  "aggs": {
-    "group_by_supervisor": {
-      "terms": {
-        "field": "supervisor.keyword"
-      }
-    }
-  }
+"size": 0,
+"aggs": {
+"group_by_supervisor": {
+"terms": {
+"field": "supervisor.keyword"
+}
+}
+}
 }
 '
