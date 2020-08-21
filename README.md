@@ -15,7 +15,7 @@ Example uses:
 Search:
 curl -X GET "localhost:9200/projects/\_search?pretty" -H 'Content-Type: application/json' -d'
 {
-"query": { "match": { "description": "cloud" } }
+"query": { "multi_match": { "query": "cloud" } }
 }
 '
 
