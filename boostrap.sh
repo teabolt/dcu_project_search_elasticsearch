@@ -2,12 +2,16 @@ source .env
 
 curl "$CLUSTER/_cat/health?v"
 
-curl -X PUT "$CLUSTER/projects/_mapping?pretty" -H 'Content-Type: application/json' -d'
+curl -X PUT "$CLUSTER/projects"
+
+curl -X PUT "$CLUSTER/projects/?pretty" -H 'Content-Type: application/json' -d'
 {
-  "properties": {
-    "students": {
-      "type": "nested"
-    }
+  "mappings": {
+      "properties": {
+        "students": {
+          "type": "nested"
+        }
+      }
   }
 }
 '
