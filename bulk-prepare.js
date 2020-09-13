@@ -8,7 +8,18 @@ const PROJECTS_URL =
 
 const SAVE_DIR = "./bulk-data";
 
-const YEARS = ["2020", "2019"];
+const YEARS = [
+  "2020",
+  "2019",
+  "2018",
+  "2017",
+  "2016",
+  "2015",
+  "2014",
+  "2013",
+  "2012",
+  "2011",
+];
 
 /* Fetch projects data for a single year. */
 export async function fetchData(year) {
