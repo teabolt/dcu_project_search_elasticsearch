@@ -16,4 +16,4 @@ curl -X PUT "$CLUSTER/projects/?pretty" -H 'Content-Type: application/json' -d'
 }
 '
 
-curl -X POST "$CLUSTER/projects/_refresh?pretty"
+./refresh.sh

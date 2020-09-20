@@ -2,9 +2,7 @@
   "name": "dcu_project_search_elasticsearch",
   "version": "1.0.0",
   "description": "DCU Project Search ElasticSearch utils",
-  "main": "load.js",
   "scripts": {
-    "start": "node load.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tomas Baltrunas",
