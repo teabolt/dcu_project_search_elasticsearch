@@ -1,5 +1,3 @@
-source .env
-
 BULK_FILE=$1
 
 echo "Indexing $BULK_FILE at $CLUSTER"

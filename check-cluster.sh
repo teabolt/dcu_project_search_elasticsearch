@@ -1,5 +1,3 @@
-source .env
-
 echo "Health"
 curl -X GET "$CLUSTER/_cat/health?v"
 echo "Nodes"
