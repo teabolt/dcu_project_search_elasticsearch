@@ -38,6 +38,12 @@ curl -X GET "\$CLUSTER/projects/\_search?pretty" -H 'Content-Type: application/j
 '
 ```
 
+By ID:
+
+```
+curl -X GET "\$CLUSTER/projects/\_doc/20200?pretty"
+```
+
 Aggregate:
 
 ```
