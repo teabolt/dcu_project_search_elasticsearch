@@ -21,6 +21,12 @@ const YEARS = [
   "2011",
 ];
 
+// Command line arguments
+const args = process.argv.slice(2);
+
+// Take the rest of the arguments as years to prepare.
+const years = args;
+
 /* Fetch projects data for a single year. */
 export async function fetchData(year) {
   try {
@@ -58,12 +64,12 @@ export function bulkPrepare(data, year) {
 /* This downloads the data of the listed years and transforms it into a format
    suitable for ElasticSearch bulk requests.
 */
-function loadYears() {
+function loadYears(yearsForPreparation = YEARS) {
   if (!fs.existsSync(SAVE_DIR)) {
     fs.mkdirSync(SAVE_DIR);
   }
 
-  YEARS.forEach(async (year) => {
+  yearsForPreparation.forEach(async (year) => {
     const data = await fetchData(year);
     const versionedData = versionData(data, year);
     const bulkData = bulkPrepare(versionedData, year);
@@ -74,4 +80,5 @@ function loadYears() {
   });
 }
 
-loadYears();
+// Default to all years if none are specified
+loadYears(years.length > 0 ? years : undefined);
