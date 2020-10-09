@@ -60,3 +60,9 @@ curl -X GET "\$CLUSTER/projects/\_search?pretty" -H 'Content-Type: application/j
 }
 '
 ```
+
+Delete a document:
+
+```
+curl -X DELETE "$CLUSTER/projects/_doc/id"
+```

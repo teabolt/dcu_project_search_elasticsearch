@@ -21,6 +21,9 @@ const YEARS = [
   "2011",
 ];
 
+// Don't include projects with the following ID's
+const PROJECT_BLOCKLIST = ["2017163"];
+
 // Command line arguments
 const args = process.argv.slice(2);
 
@@ -47,16 +50,24 @@ export function versionData(data, year) {
   });
 }
 
+export function generateProjectId(year, idx) {
+  return `${year}${idx}`;
+}
+
 /* Transform source JSON data into ElasticSearch bulk request format. */
 export function bulkPrepare(data, year) {
   const bulk = [];
   data.forEach((project, i) => {
-    bulk.push(
-      {
-        index: { _id: `${year}${i}` },
-      },
-      project
-    );
+    const projectId = generateProjectId(year, i);
+    // Don't include blocked projects
+    if (!PROJECT_BLOCKLIST.some((blockedId) => blockedId === projectId)) {
+      bulk.push(
+        {
+          index: { _id: projectId },
+        },
+        project
+      );
+    }
   });
   return bulk;
 }
