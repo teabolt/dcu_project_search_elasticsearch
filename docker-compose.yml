@@ -7,7 +7,6 @@ services:
       - node.name=es01
       - cluster.name=es-docker-cluster
       - discovery.type=single-node
-      - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms${MIN_HEAP_SIZE} -Xmx${MAX_HEAP_SIZE}"
     ulimits:
       memlock:
