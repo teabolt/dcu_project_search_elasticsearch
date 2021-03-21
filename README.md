@@ -14,10 +14,6 @@ This repository contains a declarative ElasticSearch configuration through Docke
 * npm
 * Shell
 
-Download the required dependencies for node scripts:
-
-`npm run start`
-
 ## Run an ElasticSearch cluster
 
 Run a single node development ElasticSearch cluster:
